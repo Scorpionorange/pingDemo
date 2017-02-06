@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by ScorpionOrange on 2017/02/06.
@@ -32,14 +33,24 @@ public class PingDemo {
         return flag;
     }
 
-    public boolean isUrlExists(String url){
-        boolean isExists = false;
-
+    public boolean isUrlExists(String url) throws Exception{
         try{
             //设置此类是否应该自动执行HTTP重定向（响应代码为3xx的请求）；
             HttpURLConnection.setFollowRedirects(false);
+            //到URL所引用的远程对象的连接
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            /*
+              设置URL请求的方法，
+              GET POST HEAD OPTION PUT DELETE TRACE
+              以上方法之一是合法的，具体取决于协议的限制
+             */
+            connection.setRequestMethod("HEAD");
+            //从HTTP响应消息中获取状态码
+            return (connection.getResponseCode() == HttpURLConnection.HTTP_OK);
         }
-
-        return isExists;
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }
