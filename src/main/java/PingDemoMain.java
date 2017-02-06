@@ -1,11 +1,12 @@
+import java.io.IOException;
+
 /**
  * Created by ScorpionOrange on 2017/02/06.
  */
 public class PingDemoMain {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         System.out.println("Testing");
-        String Address = "www.baidu.com";
-        boolean is = new PingDemo().ping(Address);
-        System.out.println();
+        String url = "www.baidu.com";
+        //System.out.println(new PingDemo().ping(url));
     }
 }
