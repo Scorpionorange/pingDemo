@@ -13,8 +13,9 @@ public class PingDemoMain {
         System.out.println("Using Url Method: " + new PingDemo().isUrlExists(url));
 
         Document document = Jsoup.connect(url).get();
-        Elements elements = document.select("div[error-code]");
-        String state = elements.text();
+        Elements elements = document.select("*");
+        Elements errorCode = elements.select("div.class").select("error-code");
+        String state = errorCode.text();
         System.out.println(state);
 
         /*
