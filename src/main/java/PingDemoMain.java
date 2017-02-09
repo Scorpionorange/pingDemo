@@ -13,10 +13,15 @@ public class PingDemoMain {
         System.out.println("Using Url Method: " + new PingDemo().isUrlExists(url));
 
         Document document = Jsoup.connect(url).get();
-        Elements elements = document.select("*");
-        Elements errorCode = elements.select("div.class").select("error-code");
-        String state = errorCode.text();
-        System.out.println(state);
+        Elements elements = document.select(":contains(抱歉，没有找到该页面)");
+        //Elements errorCode = elements.select("div.class").select("error-code");
+        String state = elements.text();
+        if(state.length() != 0){
+            System.out.println("Yeah!");
+        }
+        else {
+            System.out.println("Fuck!");
+        }
 
         /*
         String url = "https://www.oschina.net/news";
