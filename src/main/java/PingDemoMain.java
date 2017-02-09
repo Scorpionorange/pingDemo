@@ -13,7 +13,7 @@ public class PingDemoMain {
         System.out.println("Using Url Method: " + new PingDemo().isUrlExists(url));
 
         Document document = Jsoup.connect(url).get();
-        Elements elements = document.select("抱歉，没有找到该页面");
+        Elements elements = document.select("div[error-code]");
         String state = elements.text();
         System.out.println(state);
 
